@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-// Reaction subdocument schema
+// Reaction subdocument schema without disabling _id
 const ReactionSchema = new Schema({
   reactionBody: {
     type: String,
@@ -14,14 +14,15 @@ const ReactionSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    // Use a getter method to format the timestamp on query
+    // Consider implementing a getter method here to format the timestamp
   },
 }, {
   toJSON: {
     getters: true,
-  },
-  _id: false, // Prevents creation of an _id for each reaction subdocument
+  }
+  // Removed the _id: false option, so Mongoose will add an _id field automatically
 });
+
 
 // Thought schema
 const ThoughtSchema = new Schema({

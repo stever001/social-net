@@ -5,18 +5,29 @@ const {
   createThought,
   updateThought,
   deleteThought,
-  // Add any additional handlers you have for thoughts or reactions here
+  addReaction,
+  removeReaction,
+  getReactions
 } = require('../../controllers/thoughtsController');
 
-// Placeholder routes, implement these in your thoughtsController
 router.route('/')
-  .get(getAllThoughts) // Get all thoughts
-  .post(createThought); // Create a new thought
+  .get(getAllThoughts)
+  .post(createThought);
 
 router.route('/:id')
-  .get(getThoughtById) // Get a thought by ID
-  .put(updateThought) // Update a thought by ID
-  .delete(deleteThought); // Delete a thought by ID
+  .get(getThoughtById)
+  .put(updateThought)
+  .delete(deleteThought);
 
-// Export the thought routes
+// Routes for handling reactions
+router.route('/:thoughtId/reactions')
+  .post(addReaction); // Add a reaction to a thought
+
+  router.route('/:thoughtId/reactions')
+  .get(getReactions); //Get all reactions for a specifc thought
+
+  router.route('/:thoughtId/reactions/:reactionId')
+  .delete(removeReaction); // Remove a reaction from a thought
+
 module.exports = router;
+
